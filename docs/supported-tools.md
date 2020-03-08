@@ -7,7 +7,6 @@ Tool | Java | Android<br/>(Java) | Kotlin | Android<br/>(Kotlin)
 ---- | -------- | -------- | ----- | -----
 [`Checkstyle`](https://checkstyle.sourceforge.net) | :white_check_mark: | :white_check_mark: | — | —
 [`PMD`](https://pmd.github.io) | :white_check_mark: | :white_check_mark: | — | —
-[`FindBugs`](http://findbugs.sourceforge.net/) | :white_check_mark: | :white_check_mark: | — | —
 [`SpotBugs`](https://spotbugs.github.io/) | :white_check_mark: | :white_check_mark: | — | —
 [`Detekt`](https://github.com/arturbosch/detekt) | — | — | :white_check_mark: | :white_check_mark:
 [`Android Lint`](https://developer.android.com/studio/write/lint.html) | — | :white_check_mark:️ | — | :white_check_mark:️
@@ -22,7 +21,6 @@ For additional informations and tips on how to obtain advanced behaviours with t
    * [Detekt](tools/detekt.md)
    * [Checkstyle](tools/checkstyle.md)
    * [PMD](tools/pmd.md)
-   * [Findbugs](tools/findbugs.md)
    * [SpotBugs](tools/spotbugs.md)
    * [Android Lint](tools/android_lint.md)
    * [KtLint](tools/ktlint.md)
@@ -41,7 +39,6 @@ staticAnalysis {
 
     checkstyle {}
     pmd {}
-    findbugs {}
     spotbugs {}
     lintOptions {}
     detekt {}

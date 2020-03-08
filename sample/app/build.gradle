@@ -47,12 +47,6 @@ staticAnalysis {
         includeVariants { variant -> variant.name.contains('debug') }
     }
 
-    findbugs {
-        toolVersion '3.0.1'
-        excludeFilter rootProject.file('team-props/findbugs-excludes.xml')
-        includeVariants { variant -> variant.name.contains('debug') }
-    }
-
     spotbugs {
         excludeFilter rootProject.file('team-props/findbugs-excludes.xml')
         includeVariants { variant -> variant.name.contains('debug') }

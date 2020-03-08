@@ -102,7 +102,7 @@ in the configuration of your tool of choice:
 
 ```gradle
 staticAnalysis {
-    findbugs {
+    pmd {
         exclude '**/*Test.java' // file pattern
         exclude project.fileTree('src/test/java') // entire folder
         exclude project.file('src/main/java/foo/bar/Constants.java') // specific file
@@ -121,7 +121,7 @@ via the `includeVariants` method added to each tool extension. E.g.,
 
 ```gradle
 staticAnalysis {
-    findbugs {
+    ktlint {
         includeVariants { variant ->
             variant.name == 'debug' // only the debug variant
         }
@@ -177,10 +177,10 @@ pmd {
 }
 ```
 
-#### FindBugs
+#### Spotbugs
 ```gradle
-findbugs {
-    excludeFilter rules.novoda['findbugs-excludes.xml'].asFile()
+spotbugs {
+    excludeFilter rules.novoda['spotbugs-excludes.xml'].asFile()
 }
 ```
 
