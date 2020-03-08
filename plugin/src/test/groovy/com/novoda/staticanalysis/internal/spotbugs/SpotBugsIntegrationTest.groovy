@@ -15,16 +15,25 @@ import static com.novoda.test.LogsSubject.assertThat
 @RunWith(Parameterized.class)
 class SpotBugsIntegrationTest {
 
-    @Parameterized.Parameters(name = "{0}")
-    static Iterable<TestProjectRule> rules() {
-        return [TestProjectRule.forJavaProject(), TestProjectRule.forAndroidProject()]
+    @Parameterized.Parameters(name = "{0} with spotbugs {1}")
+    static def rules() {
+        return [
+                [TestProjectRule.forJavaProject(), '2.0.0'],
+                [TestProjectRule.forAndroidProject(), '2.0.0'],
+                [TestProjectRule.forJavaProject(), '3.0.0'],
+                [TestProjectRule.forAndroidProject(), '3.0.0'],
+                [TestProjectRule.forJavaProject(), '4.0.1'],
+                [TestProjectRule.forAndroidProject(), '4.0.1'],
+        ]*.toArray()
     }
 
     @Rule
     public final TestProjectRule projectRule
+    private final String version
 
-    SpotBugsIntegrationTest(TestProjectRule projectRule) {
+    SpotBugsIntegrationTest(TestProjectRule projectRule, String version) {
         this.projectRule = projectRule
+        this.version = version
     }
 
     @Test
@@ -176,6 +185,6 @@ class SpotBugsIntegrationTest {
 
     private TestProject createProjectWith() {
         projectRule.newProject()
-                .withPlugin('com.github.spotbugs', "2.0.0")
+                .withPlugin('com.github.spotbugs', version)
     }
 }
