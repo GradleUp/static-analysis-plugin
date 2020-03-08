@@ -1,33 +1,37 @@
-# This is a basic workflow to help you get started with Actions
+name: Test
 
-name: CI
-
-# Controls when the action will run. Triggers the workflow on push or pull request 
-# events but only for the master branch
 on:
   push:
     branches: [ master ]
   pull_request:
-    branches: [ master ]
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - uses: gradle/wrapper-validation-action@v1
+      - name: Cache gradle
+        uses: actions/cache@v1
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
-    # Runs a single command using the runners shell
-    - name: Run a one-line script
-      run: echo Hello, world!
+      - name: Run tests
+        run: ./gradlew build --stacktrace
 
-    # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+      - name: Bundle the build report
+        if: failure()
+        run: find . -type d -name 'reports' | zip -@ -r build-reports.zip
+      - name: Upload the build report
+        if: failure()
+        uses: actions/upload-artifact@master
+        with:
+          name: error-report
+          path: build-reports.zip
