@@ -56,6 +56,10 @@ class KtlintIntegrationTest {
                 [TestProjectRule.forAndroidKotlinProject(), '8.0.0', 'ktlintMainSourceSetCheck.txt', DEFAULT_CONFIG],
                 [TestProjectRule.forKotlinProject(), '9.0.0', 'ktlintMainSourceSetCheck.txt', DEFAULT_CONFIG_V9],
                 [TestProjectRule.forAndroidKotlinProject(), '9.0.0', 'ktlintMainSourceSetCheck.txt', DEFAULT_CONFIG_V9],
+                [TestProjectRule.forKotlinProject(), '9.1.1', 'ktlintMainSourceSetCheck.txt', DEFAULT_CONFIG_V9],
+                [TestProjectRule.forAndroidKotlinProject(), '9.1.1', 'ktlintMainSourceSetCheck.txt', DEFAULT_CONFIG_V9],
+                [TestProjectRule.forKotlinProject(), '9.2.1', 'ktlintMainSourceSetCheck.txt', DEFAULT_CONFIG_V9],
+                [TestProjectRule.forAndroidKotlinProject(), '9.2.1', 'ktlintMainSourceSetCheck.txt', DEFAULT_CONFIG_V9],
         ]*.toArray()
     }
 
