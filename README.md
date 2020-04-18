@@ -113,3 +113,22 @@ This project is routinely used by many Novoda projects and by other external pro
 
 Future improvements and new tool integrations can be found on the repository's
 [issue tracker](https://github.com/novoda/gradle-static-analysis-plugin/issues?q=is%3Aopen+is%3Aissue+label%3Aenhancement).
+
+
+## License 
+
+> This project is forked from its original location by the original authors https://github.com/novoda/gradle-static-analysis-plugin 
+
+Copyright 2020 The GradleUp Authors
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
