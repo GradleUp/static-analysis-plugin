@@ -49,7 +49,6 @@ from how the other tools' configurations closures work. For example:
 detekt {
     toolVersion = "[version]" // custom toolVersion defined. By default, it is the Gradle plugin version
     input = files("src/main/kotlin") // Optional: files representing project's Kotlin sources
-    filters = ".*/resources/.*,.*/build/.*" // A comma-separated list of regex exclusions
     baseline = file("my-detekt-baseline.xml") // Optional: Just if you want to create a baseline file.
 }
 ```
@@ -59,14 +58,6 @@ in the Detekt configuration file as it will interfere with the functioning of th
 sure that `failFast` is set to `false` in the Detekt configuration.
 
 For more information about Detekt rules, refer to the [official website](https://arturbosch.github.io/detekt/#quick-start-with-gradle).
-
-## Exclude files from Detekt analysis
-
-In order to exclude files from Detekt analysis, you have to use the facilities provided by the Detekt plugin in the `detekt` configuration closure. This means,
-you have to provide a value to the `filters` property that contains the exclusion pattern(s) you wish Detekt to ignore.
-
-The `filters` property expects a string consisting in a comma-separated list of regular expression patterns, e.g., `'.*test.*,.*/resources/.*,.*/tmp/.*'`
-(which would exclude any path containing the word `test`, or any path containing a directory called `resources` or `tmp`).
 
 ## Detekt in mixed-language projects
 If your project mixes Java and Kotlin code, you don't need to have an exclusion in place for all `*.java` files. Detekt itself only looks for

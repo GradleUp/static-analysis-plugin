@@ -25,8 +25,3 @@ subprojects {
         }
     }
 }
-
-wrapper {
-    gradleVersion = '5.6.3'
-    distributionType = Wrapper.DistributionType.ALL
-}
