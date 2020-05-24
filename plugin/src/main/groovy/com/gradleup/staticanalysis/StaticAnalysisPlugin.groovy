@@ -12,8 +12,6 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
 
-import static com.gradleup.staticanalysis.internal.TasksCompat.configureEach
-
 class StaticAnalysisPlugin implements Plugin<Project> {
 
     @Override
@@ -21,9 +19,11 @@ class StaticAnalysisPlugin implements Plugin<Project> {
         def pluginExtension = project.extensions.create('staticAnalysis', StaticAnalysisExtension, project)
         def evaluateViolations = createEvaluateViolationsTask(project, pluginExtension)
         createConfigurators(project, pluginExtension, evaluateViolations).each { configurator -> configurator.execute() }
-        configureEach(project.tasks.matching { it.name == 'check' }) { task ->
-            task.dependsOn evaluateViolations
-        }
+        project.tasks
+                .matching { it.name == 'check' }
+                .configureEach { task ->
+                    task.dependsOn evaluateViolations
+                }
     }
 
     private static Task createEvaluateViolationsTask(Project project,

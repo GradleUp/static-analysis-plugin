@@ -10,7 +10,6 @@ import org.gradle.api.Project
 import org.gradle.api.Task
 
 import static com.gradleup.staticanalysis.internal.Exceptions.handleException
-import static com.gradleup.staticanalysis.internal.TasksCompat.createTask
 
 class DetektConfigurator implements Configurator {
 
@@ -84,7 +83,7 @@ Last tested compatible version: $LAST_COMPATIBLE_DETEKT_VERSION
     }
 
     private def createCollectViolationsTask(Violations violations) {
-        createTask(project, 'collectDetektViolations', CollectCheckstyleViolationsTask) { task ->
+        project.tasks.register('collectDetektViolations', CollectCheckstyleViolationsTask) { task ->
             def detektTask = project.tasks.findByName('detekt')
             try {
                 def reports = detektTask.reports

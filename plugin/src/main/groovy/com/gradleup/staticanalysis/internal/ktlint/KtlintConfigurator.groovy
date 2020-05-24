@@ -12,7 +12,6 @@ import org.gradle.api.Task
 import org.gradle.api.file.RegularFileProperty
 
 import static com.gradleup.staticanalysis.internal.Exceptions.handleException
-import static com.gradleup.staticanalysis.internal.TasksCompat.createTask
 
 class KtlintConfigurator implements Configurator {
 
@@ -119,7 +118,7 @@ Last tested compatible version: $LAST_COMPATIBLE_KTLINT_VERSION
     }
 
     private def createVariantMetaTask(variant) {
-        createTask(project, "collectKtlint${variant.name.capitalize()}VariantViolations", Task) { task ->
+        project.tasks.register("collectKtlint${variant.name.capitalize()}VariantViolations", Task) { task ->
             variant.sourceSets.forEach { sourceSet ->
                 task.dependsOn "collectKtlint${sourceSet.name.capitalize()}Violations"
             }
@@ -127,7 +126,7 @@ Last tested compatible version: $LAST_COMPATIBLE_KTLINT_VERSION
     }
 
     private def createCollectViolationsTask(Violations violations, def sourceSetName) {
-        createTask(project, "collectKtlint${sourceSetName.capitalize()}Violations", CollectCheckstyleViolationsTask) { task ->
+        project.tasks.register("collectKtlint${sourceSetName.capitalize()}Violations", CollectCheckstyleViolationsTask) { task ->
             Task ktlintTask = project.tasks.findByName("ktlint${sourceSetName.capitalize()}SourceSetCheck")
             if (ktlintTask == null) {
                 ktlintTask = project.tasks.findByName("ktlint${sourceSetName.capitalize()}Check")

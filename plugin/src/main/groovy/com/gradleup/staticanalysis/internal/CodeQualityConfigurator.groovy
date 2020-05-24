@@ -10,9 +10,6 @@ import org.gradle.api.plugins.quality.CodeQualityExtension
 import org.gradle.api.tasks.SourceTask
 import org.gradle.api.tasks.VerificationTask
 
-import static com.gradleup.staticanalysis.internal.TasksCompat.configureEach
-import static com.gradleup.staticanalysis.internal.TasksCompat.createTask
-
 abstract class CodeQualityConfigurator<T extends SourceTask & VerificationTask, E extends CodeQualityExtension> implements Configurator {
 
     protected final Project project
@@ -51,9 +48,8 @@ abstract class CodeQualityConfigurator<T extends SourceTask & VerificationTask, 
             project.plugins.withId('java') {
                 configureJavaProject()
             }
-            configureEach(project.tasks.withType(taskClass)) { task ->
-                configureToolTask(task)
-            }
+            project.tasks.withType(taskClass)
+                    .configureEach { configureToolTask(it) }
         }
     }
 
@@ -86,7 +82,7 @@ abstract class CodeQualityConfigurator<T extends SourceTask & VerificationTask, 
     }
 
     private def createVariantMetaTask(variant) {
-        createTask(project, "collect${getToolTaskNameFor(variant)}VariantViolations", Task) { task ->
+        project.tasks.register("collect${getToolTaskNameFor(variant)}VariantViolations", Task) { task ->
             task.group = 'verification'
             task.description = "Runs $toolName analysis on all sources for android ${variant.name} variant"
             task.mustRunAfter javaCompile(variant)

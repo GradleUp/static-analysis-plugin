@@ -9,8 +9,6 @@ import org.gradle.api.Task
 import org.gradle.api.plugins.quality.Pmd
 import org.gradle.api.plugins.quality.PmdExtension
 
-import static com.gradleup.staticanalysis.internal.TasksCompat.createTask
-
 class PmdConfigurator extends CodeQualityConfigurator<Pmd, PmdExtension> {
 
     static PmdConfigurator create(Project project,
@@ -51,7 +49,7 @@ class PmdConfigurator extends CodeQualityConfigurator<Pmd, PmdExtension> {
 
     @Override
     protected void createToolTaskForAndroid(sourceSet) {
-        createTask(project, getToolTaskNameFor(sourceSet), Pmd) { Pmd task ->
+        project.tasks.register(getToolTaskNameFor(sourceSet), Pmd) { Pmd task ->
             task.description = "Run PMD analysis for sourceSet ${sourceSet.name} classes"
             task.source = sourceSet.java.srcDirs
         }
@@ -59,7 +57,7 @@ class PmdConfigurator extends CodeQualityConfigurator<Pmd, PmdExtension> {
 
     @Override
     protected def createCollectViolations(String taskName, Violations violations) {
-        createTask(project, "collect${taskName.capitalize()}Violations", CollectPmdViolationsTask) { task ->
+        project.tasks.register("collect${taskName.capitalize()}Violations", CollectPmdViolationsTask) { task ->
             def pmd = project.tasks[taskName] as Pmd
             task.xmlReportFile = pmd.reports.xml.destination
             task.violations = violations

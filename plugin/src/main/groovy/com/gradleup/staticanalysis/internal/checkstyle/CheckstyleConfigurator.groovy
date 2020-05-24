@@ -9,8 +9,6 @@ import org.gradle.api.Task
 import org.gradle.api.plugins.quality.Checkstyle
 import org.gradle.api.plugins.quality.CheckstyleExtension
 
-import static com.gradleup.staticanalysis.internal.TasksCompat.createTask
-
 class CheckstyleConfigurator extends CodeQualityConfigurator<Checkstyle, CheckstyleExtension> {
 
     static CheckstyleConfigurator create(Project project,
@@ -50,7 +48,7 @@ class CheckstyleConfigurator extends CodeQualityConfigurator<Checkstyle, Checkst
 
     @Override
     protected void createToolTaskForAndroid(sourceSet) {
-        createTask(project, getToolTaskNameFor(sourceSet), Checkstyle) { task ->
+        project.tasks.register(getToolTaskNameFor(sourceSet), Checkstyle) { task ->
             task.description = "Run Checkstyle analysis for ${sourceSet.name} classes"
             task.source = sourceSet.java.srcDirs
             task.classpath = project.files("${project.buildDir}/intermediates/classes/")
@@ -65,7 +63,7 @@ class CheckstyleConfigurator extends CodeQualityConfigurator<Checkstyle, Checkst
 
     @Override
     protected def createCollectViolations(String taskName, Violations violations) {
-        createTask(project, "collect${taskName.capitalize()}Violations", CollectCheckstyleViolationsTask) { task ->
+        project.tasks.register("collect${taskName.capitalize()}Violations", CollectCheckstyleViolationsTask) { task ->
             def checkstyle = project.tasks[taskName] as Checkstyle
             task.xmlReportFile = checkstyle.reports.xml.destination
             task.violations = violations
