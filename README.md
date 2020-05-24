@@ -1,5 +1,5 @@
 # Gradle static analysis plugin
-![CI](https://github.com/GradleUp/static-analysis-plugin/workflows/ci/badge.svg) 
+![Test](https://github.com/GradleUp/static-analysis-plugin/workflows/Test/badge.svg)
 [![](https://img.shields.io/badge/License-Apache%202.0-lightgrey.svg)](LICENSE.txt)
 
 A Gradle plugin to easily apply the same setup of static analysis tools across different Android, Java or Kotlin projects.
