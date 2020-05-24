@@ -41,7 +41,7 @@ In most common cases, adding Detekt to a project boils down to three simple step
     ```
 
 ## Configure Detekt
-Enabling and configuring Detekt for a project is done through the `detekt` closure. The closure behaves exactly like the
+To enable and configure Detekt for a project use the `detekt` closure. The closure behaves exactly like the
 [standard Detekt plugin](https://github.com/arturbosch/detekt#with-gradle) does in Gradle, which is to say, quite differently
 from how the other tools' configurations closures work. For example:
 
@@ -53,8 +53,6 @@ detekt {
     baseline = file("my-detekt-baseline.xml") // Optional: Just if you want to create a baseline file.
 }
 ```
-
-(assuming you're using the Novoda scaffolding system, see [Example configurations](#example-configurations) for more details)
 
 You need to provide **at a minimum** the `config` and `output` values. It's important that you do _not_ specify a `warningThreshold` nor a `failThreshold`
 in the Detekt configuration file as it will interfere with the functioning of the Static Analysis plugin's threshold counting. For the same reason, make

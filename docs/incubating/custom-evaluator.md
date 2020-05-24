@@ -1,9 +1,5 @@
 # Custom violations evaluator (incubating)
 
-> Since: [`0.5.1`](https://github.com/novoda/gradle-static-analysis-plugin/releases/tag/v0.5.1)
->
-> :warning: This is an **experimental**, incubating feature that may be subject to breaking API changes at any time!
-
 The plugin uses a [`ViolationsEvaluator`][violationsevaluatorcode] to determine what to do with the results collected from all the active
 tools (if any). The built-in behaviour is provided by the [`DefaultViolationsEvaluator`][defaultviolationsevaluatorcode], which you can
 read more about [below](#the-defaultviolationsevaluator). The plugin's violations evaluation behaviour is not fixed, and it can be
@@ -84,6 +80,6 @@ Please note that the presence of an `evaluator` property will make the plugin ig
 want to provide behaviour on top of the default [`DefaultViolationsEvaluator`][defaultviolationsevaluatorcode], you can have your own
 evaluator run its logic and then delegate the thresholds counting to an instance of `DefaultViolationsEvaluator` you create.
 
-[violationsevaluatorcode]: https://github.com/novoda/gradle-static-analysis-plugin/blob/master/plugin/src/main/groovy/com/novoda/staticanalysis/ViolationsEvaluator.groovy
-[defaultviolationsevaluatorcode]: https://github.com/novoda/gradle-static-analysis-plugin/blob/master/plugin/src/main/groovy/com/novoda/staticanalysis/DefaultViolationsEvaluator.groovy
-[violationscode]: https://github.com/novoda/gradle-static-analysis-plugin/blob/master/plugin/src/main/groovy/com/novoda/staticanalysis/Violations.groovy
+[violationsevaluatorcode]: https://github.com/GradleUp/gradle-static-analysis-plugin/blob/master/plugin/src/main/groovy/com/gradleup/staticanalysis/ViolationsEvaluator.groovy
+[defaultviolationsevaluatorcode]: https://github.com/GradleUp/gradle-static-analysis-plugin/blob/master/plugin/src/main/groovy/com/gradleup/staticanalysis/DefaultViolationsEvaluator.groovy
+[violationscode]: https://github.com/GradleUp/gradle-static-analysis-plugin/blob/master/plugin/src/main/groovy/com/gradleup/staticanalysis/Violations.groovy

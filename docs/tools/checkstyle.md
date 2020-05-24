@@ -10,7 +10,7 @@ plugin only runs Checkstyle on projects that contain the Java or the Android plu
 ---
 
 ## Configure Checkstyle
-Enabling and configuring Checkstyle for a project is done through the `checkstyle` closure:
+To enable and configure Checkstyle for a project use the `checkstyle` closure:
 
 ```gradle
 checkstyle {
@@ -20,8 +20,6 @@ checkstyle {
     includeVariants { variant -> ... } // A closure to determine which variants (for Android) to include
 }
 ```
-
-(assuming you're using the Novoda scaffolding system, see [Example configurations](#example-configurations) for more details)
 
 You can have multiple `exclude` statements.
 
@@ -63,5 +61,3 @@ You then need to reference this file from the Checkstyle configuration file:
     ...
 </module>
 ```
-
-(assuming you're using the Novoda scaffolding system, see [Example configurations](#example-configurations) for more details)

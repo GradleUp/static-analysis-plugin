@@ -8,15 +8,15 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.novoda.static-analysis'
+apply plugin: 'com.gradleup.static-analysis'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 29
 
     defaultConfig {
-        applicationId 'com.novoda.staticanalysis.sample'
+        applicationId 'com.gradleup.staticanalysis.sample'
         minSdkVersion 16
-        targetSdkVersion 27
+        targetSdkVersion 29
         versionCode 1
         versionName '1.0'
     }
@@ -25,7 +25,7 @@ android {
 dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
 }
 
 staticAnalysis {
@@ -60,7 +60,6 @@ staticAnalysis {
 
     detekt {
         config = rootProject.files('team-props/detekt-config.yml')
-        filters = '.*test.*,.*/resources/.*,.*/tmp/.*'
     }
 
     ktlint {

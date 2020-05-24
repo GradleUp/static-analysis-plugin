@@ -21,8 +21,6 @@ spotbugs {
 }
 ```
 
-(assuming you're using the Novoda scaffolding system, see [Example configurations](#example-configurations) for more details)
-
 For more information about SpotBugs rules, refer to the [official website](https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html).
 
 ## SpotBugs in mixed-language projects

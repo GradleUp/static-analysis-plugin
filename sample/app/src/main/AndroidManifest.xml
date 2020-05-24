@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
-  package="com.novoda.staticanalysisplugin.sample">
+  package="com.gradleup.staticanalysisplugin.sample">
 
   <application
     android:allowBackup="false"
@@ -10,14 +10,14 @@
     android:theme="@style/AppTheme"
     tools:ignore="GoogleAppIndexingWarning">
 
-    <activity android:name="com.novoda.staticanalysisplugin.sample.MyActivity">
+    <activity android:name=".MyActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
 
-    <activity android:name="com.novoda.staticanalysisplugin.sample.SomeOtherActivity" />
+    <activity android:name=".SomeOtherActivity" />
 
   </application>
 

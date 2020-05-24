@@ -1,5 +1,4 @@
 apply plugin: 'groovy'
-apply from: rootProject.file('gradle/publish.gradle')
 
 sourceSets {
     test {
@@ -27,5 +26,4 @@ dependencies {
     testCompile libraries.guava
     testCompile libraries.findbugs.annotations
     testCompile libraries.mockito
-
 }
