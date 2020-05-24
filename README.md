@@ -1,5 +1,5 @@
 # Gradle static analysis plugin
-![CI](https://github.com/GradleUp/gradle-static-analysis-plugin/workflows/ci/badge.svg) 
+![CI](https://github.com/GradleUp/static-analysis-plugin/workflows/ci/badge.svg) 
 [![](https://img.shields.io/badge/License-Apache%202.0-lightgrey.svg)](LICENSE.txt)
 
 A Gradle plugin to easily apply the same setup of static analysis tools across different Android, Java or Kotlin projects.
@@ -11,7 +11,7 @@ Gradle supports many popular static analysis (Checkstyle, PMD, SpotBugs, etc) vi
 Using these plugins in an Android module will require an additional setup to compensate for the differences between
 the model adopted by the Android plugin compared to the Java one.
 
-The `gradle-static-analysis-plugin` aims to provide:
+The `static-analysis-plugin` aims to provide:
 - flexible, configurable penalty strategy for builds
 - easy, Android-friendly integration for all static analysis
 - convenient way of sharing same setup across different projects
@@ -36,16 +36,16 @@ Please note that the tools availability depends on the project the plugin is app
  * `error-prone`
  * `Jetbrains IDEA Inspections`
 
-For all tools in consideration, please refer to [issues](https://github.com/GradleUp/gradle-static-analysis-plugin/issues?q=is%3Aissue+is%3Aopen+label%3A%22new+tool%22). 
+For all tools in consideration, please refer to [issues](https://github.com/GradleUp/static-analysis-plugin/issues?q=is%3Aissue+is%3Aopen+label%3A%22new+tool%22). 
 
 ### Out-of-the-box support for Android projects
 Android projects use a Gradle model that is not compatible with the Java one, supported by the built-in static analysis tools plugins.
-Applying `gradle-static-analysis-plugin` to your Android project will make sure all the necessary tasks are created and correctly configured
+Applying `com.gradleup.static-analysis` Plugin to your Android project will make sure all the necessary tasks are created and correctly configured
 without any additional hassle.
 
 ## Add the plugin to your project
         
-[ ![Bintray](https://img.shields.io/bintray/v/gradleup/maven/gradle-static-analysis-plugin) ](https://bintray.com/gradleup/maven/gradle-static-analysis-plugin/_latestVersion)
+[ ![Bintray](https://img.shields.io/bintray/v/gradleup/maven/static-analysis-plugin) ](https://bintray.com/gradleup/maven/static-analysis-plugin/_latestVersion)
 [ ![Gradle Plugin Portal](https://img.shields.io/maven-metadata/v/https/plugins.gradle.org/m2/com/gradleup/static-analysis/manifest/com.gradleup.static-analysis.gradle.plugin/maven-metadata.xml.svg?label=Gradle%20Plugins%20Portal) ](https://plugins.gradle.org/plugin/com.gradleup.static-analysis)
 
 Add the plugin in `build.gradle(.kts)` file
@@ -92,7 +92,7 @@ This will enable all the tools with their default settings and create `evaluateV
 [advanced usage](docs/advanced-usage.md) and to the [supported tools](docs/supported-tools.md) pages.
 
 ## Sample app
-There are two sample Android projects available, one consisting of a regular app - available [here](https://github.com/GradleUp/gradle-static-analysis-plugin/tree/master/sample) - and the other comprising a multi-module setup available [here](https://github.com/GradleUp/gradle-static-analysis-plugin/tree/master/sample-multi-module). Both sample projects showcase a setup featuring Checkstyle, SpotBugs, PMD, Lint, Ktlint and Detekt.
+There are two sample Android projects available, one consisting of a regular app - available [here](https://github.com/GradleUp/static-analysis-plugin/tree/master/sample) - and the other comprising a multi-module setup available [here](https://github.com/GradleUp/static-analysis-plugin/tree/master/sample-multi-module). Both sample projects showcase a setup featuring Checkstyle, SpotBugs, PMD, Lint, Ktlint and Detekt.
 
 ## License 
 

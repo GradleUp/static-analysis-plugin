@@ -80,6 +80,6 @@ Please note that the presence of an `evaluator` property will make the plugin ig
 want to provide behaviour on top of the default [`DefaultViolationsEvaluator`][defaultviolationsevaluatorcode], you can have your own
 evaluator run its logic and then delegate the thresholds counting to an instance of `DefaultViolationsEvaluator` you create.
 
-[violationsevaluatorcode]: https://github.com/GradleUp/gradle-static-analysis-plugin/blob/master/plugin/src/main/groovy/com/gradleup/staticanalysis/ViolationsEvaluator.groovy
-[defaultviolationsevaluatorcode]: https://github.com/GradleUp/gradle-static-analysis-plugin/blob/master/plugin/src/main/groovy/com/gradleup/staticanalysis/DefaultViolationsEvaluator.groovy
-[violationscode]: https://github.com/GradleUp/gradle-static-analysis-plugin/blob/master/plugin/src/main/groovy/com/gradleup/staticanalysis/Violations.groovy
+[violationsevaluatorcode]: https://github.com/GradleUp/static-analysis-plugin/blob/master/plugin/src/main/groovy/com/gradleup/staticanalysis/ViolationsEvaluator.groovy
+[defaultviolationsevaluatorcode]: https://github.com/GradleUp/static-analysis-plugin/blob/master/plugin/src/main/groovy/com/gradleup/staticanalysis/DefaultViolationsEvaluator.groovy
+[violationscode]: https://github.com/GradleUp/static-analysis-plugin/blob/master/plugin/src/main/groovy/com/gradleup/staticanalysis/Violations.groovy

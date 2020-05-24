@@ -131,7 +131,7 @@ staticAnalysis {
 
 Please note that this is not yet supported for Detekt.
 
-[penaltyextensioncode]: https://github.com/gradleup/gradle-static-analysis-plugin/blob/master/plugin/src/main/groovy/com/gradleup/staticanalysis/PenaltyExtension.groovy
+[penaltyextensioncode]: https://github.com/GradleUp/static-analysis-plugin/blob/master/plugin/src/main/groovy/com/gradleup/staticanalysis/PenaltyExtension.groovy
 
 
 ## Consume rules from an artifact     
