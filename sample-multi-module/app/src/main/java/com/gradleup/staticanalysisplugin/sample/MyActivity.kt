@@ -1,4 +1,4 @@
-package com.novoda.staticanalysisplugin.sample
+package com.gradleup.staticanalysisplugin.sample
 
 import android.content.Intent
 import android.os.Bundle
