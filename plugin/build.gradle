@@ -1,22 +1,5 @@
 apply plugin: 'groovy'
 
-sourceSets {
-    test {
-        java {
-            srcDir file('src/test/fixtures/checkstyle/warnings')
-            srcDir file('src/test/fixtures/checkstyle/errors')
-            srcDir file('src/test/fixtures/pmd/priority1')
-            srcDir file('src/test/fixtures/pmd/priority2')
-            srcDir file('src/test/fixtures/pmd/priority3')
-            srcDir file('src/test/fixtures/pmd/priority4')
-            srcDir file('src/test/fixtures/pmd/priority5')
-            srcDir file('src/test/fixtures/findbugs/high')
-            srcDir file('src/test/fixtures/findbugs/medium')
-            srcDir file('src/test/fixtures/findbugs/low')
-        }
-    }
-}
-
 dependencies {
     implementation libraries.gradleApi
 
