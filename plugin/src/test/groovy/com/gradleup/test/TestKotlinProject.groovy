@@ -9,18 +9,17 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.gradleup:gradle-static-analysis-plugin:local'
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.21'
     }
 }
 
 plugins {
     ${formatPlugins(project)}
+    id 'com.gradleup.static-analysis'
 }
 
 apply plugin: 'kotlin'
 apply plugin: 'kotlin-kapt' // adding kapt since we face compat issues before
-apply plugin: 'com.gradleup.static-analysis'
 
 repositories { 
     jcenter()

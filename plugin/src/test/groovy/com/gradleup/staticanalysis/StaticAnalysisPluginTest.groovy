@@ -18,13 +18,10 @@ class StaticAnalysisPluginTest {
 
     private static class EmptyProject extends TestProject<EmptyProject> {
         private static final Closure<String> TEMPLATE = { TestProject project ->
-            """
-buildscript {
-    dependencies {
-        classpath 'com.gradleup:gradle-static-analysis-plugin:local'
-    }
+            """       
+plugins {
+    id("com.gradleup.static-analysis")
 }
-apply plugin: 'com.gradleup.static-analysis'
 """
         }
 

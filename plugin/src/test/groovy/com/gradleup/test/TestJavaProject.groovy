@@ -4,19 +4,14 @@ final class TestJavaProject extends TestProject<TestJavaProject> {
 
     private static final Closure<String> TEMPLATE = { TestProject project ->
         """
-buildscript {
-    dependencies {
-        classpath 'com.gradleup:gradle-static-analysis-plugin:local'
-    }
-}
 plugins {
-    ${formatPlugins(project)} 
+    ${formatPlugins(project)}      
+    id 'com.gradleup.static-analysis'
 }
 repositories {
     jcenter()
 }
 apply plugin: 'java'
-apply plugin: 'com.gradleup.static-analysis'
 
 sourceSets {
     ${formatSourceSets(project)}

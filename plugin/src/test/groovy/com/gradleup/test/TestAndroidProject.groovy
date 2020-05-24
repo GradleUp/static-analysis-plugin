@@ -10,18 +10,17 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.4'
-        classpath 'com.gradleup:gradle-static-analysis-plugin:local'
     }
 }
 plugins {
     ${formatPlugins(project)}
-}
+    id 'com.gradleup.static-analysis'
+}              
 repositories { 
     google()
     jcenter()
 }
 apply plugin: 'com.android.library'
-apply plugin: 'com.gradleup.static-analysis'
 android {
     compileSdkVersion 27
 

@@ -29,6 +29,7 @@ class DeployRulesTestRule implements TestRule {
                         .withProjectDir(projectDir)
                         .withDebug(true)
                         .withArguments('clean', 'publish')
+                        .withPluginClasspath()
                         .forwardOutput()
                         .build()
                 base.evaluate()

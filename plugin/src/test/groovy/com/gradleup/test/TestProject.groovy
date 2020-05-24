@@ -19,11 +19,6 @@ abstract class TestProject<T extends TestProject> {
     private static final Closure<String> SETTINGS_GRADLE_TEMPLATE = { String projectName ->
         """
         rootProject.name = '$projectName'
-        includeBuild('$Fixtures.ROOT_DIR/src/test/test-plugin') {
-            dependencySubstitution {
-                substitute module('com.gradleup:gradle-static-analysis-plugin') with project(':')
-            }
-        }
         """
     }
     private static final String GRADLE_MEMORY_SETTINGS = 'org.gradle.jvmargs=-Xmx3g -XX:MaxMetaspaceSize=512m'
@@ -117,6 +112,7 @@ abstract class TestProject<T extends TestProject> {
         return GradleRunner.create()
                 .withProjectDir(projectDir)
                 .withArguments(args)
+                .withPluginClasspath()
                 .forwardOutput()
     }
 

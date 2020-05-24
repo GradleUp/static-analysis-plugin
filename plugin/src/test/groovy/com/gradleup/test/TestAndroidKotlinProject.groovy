@@ -11,11 +11,11 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.4'
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.21'
-        classpath 'com.gradleup:gradle-static-analysis-plugin:local'
     }
 }
 plugins {
-    ${formatPlugins(project)}   
+    ${formatPlugins(project)}
+    id 'com.gradleup.static-analysis'   
 }
 repositories {
     google()
@@ -24,7 +24,6 @@ repositories {
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt' // adding kapt since we face compat issues before
-apply plugin: 'com.gradleup.static-analysis'
 
 android {
     compileSdkVersion 27
