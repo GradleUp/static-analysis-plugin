@@ -8,13 +8,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.novoda.static-analysis'
+apply plugin: 'com.gradleup.static-analysis'
 
 android {
     compileSdkVersion 27
 
     defaultConfig {
-        applicationId 'com.novoda.staticanalysis.sample'
+        applicationId 'com.gradleup.staticanalysis.sample'
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1

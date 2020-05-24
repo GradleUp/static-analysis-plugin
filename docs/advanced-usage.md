@@ -93,7 +93,7 @@ This way, in the CI logs you will see the report URLs printed as:
 ```
 
 And that will make them easier to follow them to the respective reports. More info on the topic can be found in the
-[`LogsExtension`](blob/master/plugin/src/main/groovy/com/novoda/staticanalysis/LogsExtension.groovy)
+[`LogsExtension`](blob/master/plugin/src/main/groovy/com/gradleup/staticanalysis/LogsExtension.groovy)
 Groovydocs.
 
 ## Add exclusions with `exclude` filters
@@ -131,7 +131,7 @@ staticAnalysis {
 
 Please note that this is not yet supported for Detekt.
 
-[penaltyextensioncode]: https://github.com/novoda/gradle-static-analysis-plugin/blob/master/plugin/src/main/groovy/com/novoda/staticanalysis/PenaltyExtension.groovy
+[penaltyextensioncode]: https://github.com/gradleup/gradle-static-analysis-plugin/blob/master/plugin/src/main/groovy/com/novoda/staticanalysis/PenaltyExtension.groovy
 
 
 ## Consume rules from an artifact     
@@ -139,33 +139,33 @@ In order to reuse your rules among multiple projects or to easily use an open so
 rules for all supported tools from a Maven artifact. 
 
 ### Rules artifact
-A rule artifact is just a bundle of files that is published on a Maven repository as artifact. An example of how to do that can be be found [here](https://github.com/novoda/novoda/blob/master/scaffolding/build.gradle).
-In this case we bundle the files as jar using the using the [java plugin](https://docs.gradle.org/current/userguide/java_plugin.html) and publish it using our [bintray-release plugin](https://github.com/novoda/bintray-release). 
+A rule artifact is just a bundle of files that is published on a Maven repository as artifact. An example of how to do that can be found [here](https://github.com/novoda/novoda/blob/master/scaffolding/build.gradle).
+In this case we bundle the files as jar using the [java plugin](https://docs.gradle.org/current/userguide/java_plugin.html) and publish it to a maven repository. 
 
 ### How to define a dependency from a rules artifact
-In order to access the files inside a rule artifact you have to first define an entry in the `rules {}` extension of the plugin. An entry is defined by a name and a Maven coordinate, as follows:
+In order to access the files inside a rule artifact you have to first define an entry in the `rules {}` extension of the plugin. An entry is defined by a name and Maven coordinate, as follows:
 ```
 staticAnalysis {
     rules {
-        novoda {
-            maven 'com.novoda:static-analysis-rules:0.2'
+        example {
+            maven 'com.example:maven-coordinate-to-rules:0.2'
         }
     }
 }
 ```
 
 ### Access rules from artifact
-Once you have defined a rule artifact you can access the files inside it specifying the path of the file inside the bundle, e.g.:
+Once you have defined a rule artifact you can access the files inside it by specifying the path of the file inside the bundle, e.g.:
 ```
-def modules = rules.novoda['checkstyle-modules.xml']
+def modules = rules.example['checkstyle-modules.xml']
 ```
-Note that `modules` is defined as [`TextResource`](https://docs.gradle.org/current/dsl/org.gradle.api.resources.TextResource.html), that is a read-only body of text backed by a string, file, archive entry, or other source. Some of the tools already accept `TextResource` as value for some of their configuration, while in other cases you have to transform a `TextResource` into a `File` or a path. Some examples of using a rule artifact in the supported tools is provided below:
+Note that `modules` is defined as [`TextResource`](https://docs.gradle.org/current/dsl/org.gradle.api.resources.TextResource.html), that is a read-only body of text backed by a string, file, archive entry, or other source. Some tools already accept `TextResource` as value for some of their configuration, while in other cases you have to transform a `TextResource` into a `File` or a path. Some examples of using a rule artifact in the supported tools are as below:
 
 #### Checkstyle
 ```gradle
 checkstyle {
     toolVersion '8.8'
-    config rules.novoda['checkstyle-modules.xml']
+    config rules.example['checkstyle-modules.xml']
 }
 ```
 
@@ -173,29 +173,27 @@ checkstyle {
 ```gradle
 pmd {
     toolVersion '6.0.1'
-    ruleSetFiles = project.files(rules.novoda['pmd-rules.xml'].asFile().path)
+    ruleSetFiles = project.files(rules.example['pmd-rules.xml'].asFile().path)
 }
 ```
 
 #### Spotbugs
 ```gradle
 spotbugs {
-    excludeFilter rules.novoda['spotbugs-excludes.xml'].asFile()
+    excludeFilter rules.example['spotbugs-excludes.xml'].asFile()
 }
 ```
 
 #### Detekt
 ```gradle
 detekt {
-    profile('main') {
-        config = rules.novoda['detekt.yml'].asFile().path
-    }
+    config = files(rules.example['detekt.yml'].asFile())
 }
 ```
 
 #### Android Lint
 ```gradle
 lintOptions {
-    lintConfig = rules.novoda['lint-config.xml'].asFile()
+    lintConfig = rules.example['lint-config.xml'].asFile()
 }
 ```

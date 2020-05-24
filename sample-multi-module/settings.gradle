@@ -4,6 +4,6 @@ include ':core'
 
 includeBuild('../') {
     dependencySubstitution {
-        substitute module('com.novoda:gradle-static-analysis-plugin') with project(':plugin')
+        substitute module('com.gradleup:gradle-static-analysis-plugin') with project(':plugin')
     }
 }

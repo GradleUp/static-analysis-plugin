@@ -10,7 +10,7 @@ The plugin only runs PMD on projects that contain the Java or the Android plugin
 ---
 
 ## Configure PMD
-Enabling and configuring PMD for a project is done through the `pmd` closure:
+To enable and configure PMD for a project use the `pmd` closure:
 
 ```gradle
 pmd {
@@ -23,11 +23,9 @@ pmd {
 }
 ```
 
-(assuming you're using the Novoda scaffolding system, see [Example configurations](#example-configurations) for more details)
-
 You can have multiple `exclude` statements.
 
-For more informations about PMD Java rules, refer to the [official website](https://pmd.github.io/pmd-6.0.1/pmd_rules_java.html).
+For more information about PMD Java rules, refer to the [official website](https://pmd.github.io/pmd-6.0.1/pmd_rules_java.html).
 
 ## PMD in mixed-language projects
 If your project mixes Java and Kotlin code, you most likely want to have an exclusion in place for all `*.kt` files. You can use the `exclude`
@@ -37,7 +35,7 @@ in the configuration closure, or you can do so by adding a suppressions file:
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  name="Novoda PMD rules"
+  name="PMD rules"
   xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
   xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
 
