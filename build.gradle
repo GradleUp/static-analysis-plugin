@@ -11,6 +11,9 @@ subprojects {
         }
     }
 
+    group = property("GROUP")
+    version = property("VERSION_NAME")
+
     repositories {
         jcenter()
     }
