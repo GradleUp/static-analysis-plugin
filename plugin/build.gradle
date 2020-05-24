@@ -1,4 +1,21 @@
-apply plugin: 'groovy'
+plugins {
+    id 'java-gradle-plugin'
+    id 'groovy'
+    id 'org.gradle.maven-publish'
+    id("com.gradle.plugin-publish") version "0.11.0"
+}
+
+gradlePlugin {
+    plugins {
+        staticAnalysis {
+            id = "com.gradleup.static-analysis"
+            displayName = "Static Analysis Gradle Plugin"
+            description = "Easy and consistent setup of static analysis tools for Android and Java projects"
+            implementationClass = "com.gradleup.staticanalysis.StaticAnalysisPlugin"
+        }
+    }
+}
+
 
 sourceSets {
     test {
@@ -18,13 +35,9 @@ sourceSets {
 }
 
 dependencies {
-    implementation libraries.gradleApi
-
-    testCompile libraries.gradleTestKit
     testCompile libraries.junit
     testCompile libraries.truth
     testCompile libraries.guava
     testCompile libraries.findbugs.annotations
     testCompile libraries.mockito
-
 }

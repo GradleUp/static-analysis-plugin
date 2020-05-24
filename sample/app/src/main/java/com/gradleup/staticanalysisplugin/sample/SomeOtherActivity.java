@@ -1,4 +1,4 @@
-package com.novoda.staticanalysisplugin.sample;
+package com.gradleup.staticanalysisplugin.sample;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
