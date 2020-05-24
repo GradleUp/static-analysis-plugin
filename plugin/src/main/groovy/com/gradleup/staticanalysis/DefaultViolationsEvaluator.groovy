@@ -29,14 +29,14 @@ class DefaultViolationsEvaluator implements ViolationsEvaluator {
         int errorsDiff = Math.max(0, totalErrors - penalty.maxErrors)
         int warningsDiff = Math.max(0, totalWarnings - penalty.maxWarnings)
         if (errorsDiff > 0 || warningsDiff > 0) {
-            throw new GradleException("Violations limit exceeded by $errorsDiff errors, $warningsDiff warnings.\n\n$fullMessage")
+            throw new GradleException("Violations limit exceeded by $errorsDiff errors, $warningsDiff warnings.\n$fullMessage")
         } else if (!fullMessage.isEmpty()) {
-            logger.warn "\nViolations found ($totalErrors errors, $totalWarnings warnings)\n\n$fullMessage"
+            logger.warn "\nViolations found ($totalErrors errors, $totalWarnings warnings)\n$fullMessage"
         }
     }
 
     private static String getViolationsMessage(Violations violations, ReportUrlRenderer reportUrlRenderer) {
         "$violations.name violations found ($violations.errors errors, $violations.warnings warnings). See the reports at:\n" +
-                "${violations.reports.collect { "- ${reportUrlRenderer.render(it)}" }.join('\n')}"
+                "${violations.reports.collect { "${reportUrlRenderer.render(it)}" }.join('\n')}"
     }
 }
