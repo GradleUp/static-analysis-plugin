@@ -1,4 +1,4 @@
-rootProject.name = 'gradle-static-analysis-plugin-sample'
+rootProject.name = 'static-analysis-sample'
 include ':app'
 
 includeBuild('../') {
