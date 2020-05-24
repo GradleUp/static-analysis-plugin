@@ -9,8 +9,6 @@ import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Project
 import org.gradle.api.Task
 
-import static com.gradleup.staticanalysis.internal.TasksCompat.*
-
 class LintConfigurator implements Configurator {
 
     private final Project project
@@ -78,7 +76,7 @@ class LintConfigurator implements Configurator {
     }
 
     private def createCollectViolationsTask(String taskSuffix, String reportFileName, Violations violations) {
-        createTask(project, "collectLint${taskSuffix.capitalize()}Violations", CollectLintViolationsTask) { task ->
+        project.tasks.register("collectLint${taskSuffix.capitalize()}Violations", CollectLintViolationsTask) { task ->
             task.xmlReportFile = xmlOutputFileFor(reportFileName)
             task.htmlReportFile = htmlOutputFileFor(reportFileName)
             task.violations = violations

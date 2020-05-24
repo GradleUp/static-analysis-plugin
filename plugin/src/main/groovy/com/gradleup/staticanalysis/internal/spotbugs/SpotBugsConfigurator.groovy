@@ -6,11 +6,14 @@ import com.gradleup.staticanalysis.internal.Configurator
 import com.gradleup.staticanalysis.internal.VariantFilter
 import com.gradleup.staticanalysis.internal.findbugs.CollectFindbugsViolationsTask
 import com.gradleup.staticanalysis.internal.findbugs.GenerateFindBugsHtmlReport
-import org.gradle.api.*
+import org.gradle.api.DomainObjectSet
+import org.gradle.api.GradleException
+import org.gradle.api.NamedDomainObjectContainer
+import org.gradle.api.Project
+import org.gradle.api.Task
 import org.gradle.api.tasks.SourceTask
 
 import static com.gradleup.staticanalysis.internal.Exceptions.handleException
-import static com.gradleup.staticanalysis.internal.TasksCompat.createTask
 
 class SpotBugsConfigurator implements Configurator {
 
@@ -91,7 +94,7 @@ class SpotBugsConfigurator implements Configurator {
     }
 
     private void createToolTaskForAndroid(variant) {
-        createTask(project, getToolTaskNameFor(variant), Class.forName('com.github.spotbugs.SpotBugsTask')) { SourceTask task ->
+        project.tasks.register(getToolTaskNameFor(variant), Class.forName('com.github.spotbugs.SpotBugsTask')) { SourceTask task ->
             def javaCompile = javaCompile(variant)
             def androidSourceDirs = variant.sourceSets.collect {
                 it.javaDirectories
@@ -121,7 +124,7 @@ class SpotBugsConfigurator implements Configurator {
         if (htmlReportEnabled) {
             createHtmlReportTask(taskName)
         }
-        createTask(project, "collect${taskName.capitalize()}Violations", CollectFindbugsViolationsTask) { task ->
+        project.tasks.register("collect${taskName.capitalize()}Violations", CollectFindbugsViolationsTask) { task ->
             def spotbugs = project.tasks[taskName] as SourceTask
             configureToolTask(spotbugs)
             task.xmlReportFile = spotbugs.reports.xml.destination
@@ -136,7 +139,7 @@ class SpotBugsConfigurator implements Configurator {
     }
 
     private void createHtmlReportTask(String taskName) {
-        createTask(project, "generate${taskName.capitalize()}HtmlReport", GenerateFindBugsHtmlReport) { GenerateFindBugsHtmlReport task ->
+        project.tasks.register("generate${taskName.capitalize()}HtmlReport", GenerateFindBugsHtmlReport) { GenerateFindBugsHtmlReport task ->
             def spotbugs = project.tasks[taskName]
             task.xmlReportFile = spotbugs.reports.xml.destination
             task.htmlReportFile = new File(task.xmlReportFile.absolutePath - '.xml' + '.html')
