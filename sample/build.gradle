@@ -8,7 +8,7 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.1'
-        classpath 'com.gradleup:gradle-static-analysis-plugin:local'
+        classpath 'com.gradleup:static-analysis-plugin:local'
         classpath 'io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.9.1'
         classpath 'org.jlleitschuh.gradle:ktlint-gradle:9.0.0'
         classpath "gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:2.0.0"

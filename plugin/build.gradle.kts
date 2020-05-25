@@ -32,26 +32,11 @@ dependencies {
 
 publishing {
     publications.withType<MavenPublication> {
+        artifactId = findProperty("POM_ARTIFACT_ID")?.toString()
         pom {
-            groupId = findProperty("GROUP")?.toString()
-            version = findProperty("VERSION_NAME")?.toString()
-
             name.set(findProperty("POM_NAME")?.toString())
             description.set(findProperty("POM_DESCRIPTION")?.toString())
             packaging = findProperty("POM_PACKAGING")?.toString()
-            url.set(findProperty("POM_URL")?.toString())
-
-            scm {
-                url.set(findProperty("POM_SCM_URL")?.toString())
-                connection.set(findProperty("POM_SCM_CONNECTION")?.toString())
-            }
-
-            licenses {
-                license {
-                    name.set(findProperty("POM_LICENCE_NAME")?.toString())
-                    url.set(findProperty("POM_LICENCE_URL")?.toString())
-                }
-            }
         }
     }
 

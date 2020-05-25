@@ -64,7 +64,7 @@ buildscript {
        jcenter()
     }
     dependencies {
-        classpath("com.gradleup:gradle-static-analysis-plugin:<latest-version>")
+        classpath("com.gradleup:static-analysis-plugin:<latest-version>")
     }
 }
 
