@@ -1,4 +1,4 @@
-package com.gradleup.staticanalysis.internal.findbugs
+package com.gradleup.staticanalysis.internal.spotbugs
 
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.JavaExec
@@ -7,7 +7,7 @@ import org.gradle.api.tasks.PathSensitive
 
 import static org.gradle.api.tasks.PathSensitivity.RELATIVE
 
-class GenerateFindBugsHtmlReport extends JavaExec {
+class GenerateSpotBugsHtmlReport extends JavaExec {
 
     @InputFile
     @PathSensitive(RELATIVE)
@@ -16,7 +16,7 @@ class GenerateFindBugsHtmlReport extends JavaExec {
     @PathSensitive(RELATIVE)
     File htmlReportFile
 
-    GenerateFindBugsHtmlReport() {
+    GenerateSpotBugsHtmlReport() {
         onlyIf { xmlReportFile?.exists() }
     }
 

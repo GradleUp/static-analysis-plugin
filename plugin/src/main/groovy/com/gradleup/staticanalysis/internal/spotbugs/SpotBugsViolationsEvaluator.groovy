@@ -1,16 +1,16 @@
-package com.gradleup.staticanalysis.internal.findbugs
+package com.gradleup.staticanalysis.internal.spotbugs
 
 import groovy.util.slurpersupport.GPathResult
 
-class FinbugsViolationsEvaluator {
+class SpotBugsViolationsEvaluator {
 
     private final GPathResult xml
 
-    FinbugsViolationsEvaluator(File report) {
+    SpotBugsViolationsEvaluator(File report) {
         this(new XmlSlurper().parse(report))
     }
 
-    FinbugsViolationsEvaluator(GPathResult xml) {
+    SpotBugsViolationsEvaluator(GPathResult xml) {
         this.xml = xml
     }
 
