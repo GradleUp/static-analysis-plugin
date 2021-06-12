@@ -144,16 +144,4 @@ class SpotBugsConfigurator implements Configurator {
     private static String getToolTaskNameFor(named) {
         "spotbugs${named.name.capitalize()}"
     }
-
-    private static def javaCompile(variant) {
-        if (variant.hasProperty('javaCompileProvider')) {
-            variant.javaCompileProvider.get()
-        } else {
-            variant.javaCompile
-        }
-    }
-
-    private def getAndroidJar() {
-        "${project.android.sdkDirectory}/platforms/${project.android.compileSdkVersion}/android.jar"
-    }
 }
