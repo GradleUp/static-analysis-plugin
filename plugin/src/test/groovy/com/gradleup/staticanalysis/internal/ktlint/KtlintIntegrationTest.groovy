@@ -18,17 +18,6 @@ class KtlintIntegrationTest {
 
     public static final String DEFAULT_CONFIG = '''
                     ktlint {
-                        reporters = [
-                            org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN, 
-                            org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE
-                        ]
-                        
-                        includeVariants { it.name == "debug" }
-                    }
-                    '''
-
-    public static final String DEFAULT_CONFIG_V9 = '''
-                    ktlint {
                         reporters {
                             reporter "plain"
                             reporter "checkstyle"
@@ -41,25 +30,12 @@ class KtlintIntegrationTest {
     @Parameterized.Parameters(name = '{0} with ktlint {1}')
     static def rules() {
         return [
-                [TestProjectRule.forKotlinProject(), '6.2.1', 'ktlintMainCheck.txt', DEFAULT_CONFIG],
-                [TestProjectRule.forAndroidKotlinProject(), '6.2.1', 'ktlintMainCheck.txt', DEFAULT_CONFIG],
-                [TestProjectRule.forKotlinProject(), '6.3.1', 'ktlintMainCheck.txt', DEFAULT_CONFIG],
-                [TestProjectRule.forAndroidKotlinProject(), '6.3.1', 'ktlintMainCheck.txt', DEFAULT_CONFIG],
-                // Fails because of Android dependency problem in non-Android project.
-                // > Could not generate a decorated class for class org.jlleitschuh.gradle.ktlint.KtlintPlugin.
-                //         > com/android/build/gradle/BaseExtension
-                // [TestProjectRule.forKotlinProject(), '7.0.0', 'ktlintMainSourceSetCheck.txt', DEFAULT_CONFIG],
-                [TestProjectRule.forAndroidKotlinProject(), '7.0.0', 'ktlintMainSourceSetCheck.txt', DEFAULT_CONFIG],
-                [TestProjectRule.forKotlinProject(), '7.3.0', 'ktlintMainSourceSetCheck.txt', DEFAULT_CONFIG],
-                [TestProjectRule.forAndroidKotlinProject(), '7.3.0', 'ktlintMainSourceSetCheck.txt', DEFAULT_CONFIG],
-                [TestProjectRule.forKotlinProject(), '8.0.0', 'ktlintMainSourceSetCheck.txt', DEFAULT_CONFIG],
-                [TestProjectRule.forAndroidKotlinProject(), '8.0.0', 'ktlintMainSourceSetCheck.txt', DEFAULT_CONFIG],
-                [TestProjectRule.forKotlinProject(), '9.0.0', 'ktlintMainSourceSetCheck.txt', DEFAULT_CONFIG_V9],
-                [TestProjectRule.forAndroidKotlinProject(), '9.0.0', 'ktlintMainSourceSetCheck.txt', DEFAULT_CONFIG_V9],
-                [TestProjectRule.forKotlinProject(), '9.1.1', 'ktlintMainSourceSetCheck.txt', DEFAULT_CONFIG_V9],
-                [TestProjectRule.forAndroidKotlinProject(), '9.1.1', 'ktlintMainSourceSetCheck.txt', DEFAULT_CONFIG_V9],
-                [TestProjectRule.forKotlinProject(), '9.2.1', 'ktlintMainSourceSetCheck.txt', DEFAULT_CONFIG_V9],
-                [TestProjectRule.forAndroidKotlinProject(), '9.2.1', 'ktlintMainSourceSetCheck.txt', DEFAULT_CONFIG_V9],
+                [TestProjectRule.forKotlinProject(), '9.0.0', 'ktlintMainSourceSetCheck.txt', DEFAULT_CONFIG],
+                [TestProjectRule.forAndroidKotlinProject(), '9.0.0', 'ktlintMainSourceSetCheck.txt', DEFAULT_CONFIG],
+                [TestProjectRule.forKotlinProject(), '9.1.1', 'ktlintMainSourceSetCheck.txt', DEFAULT_CONFIG],
+                [TestProjectRule.forAndroidKotlinProject(), '9.1.1', 'ktlintMainSourceSetCheck.txt', DEFAULT_CONFIG],
+                [TestProjectRule.forKotlinProject(), '9.2.1', 'ktlintMainSourceSetCheck.txt', DEFAULT_CONFIG],
+                [TestProjectRule.forAndroidKotlinProject(), '9.2.1', 'ktlintMainSourceSetCheck.txt', DEFAULT_CONFIG],
         ]*.toArray()
     }
 
