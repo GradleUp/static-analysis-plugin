@@ -4,8 +4,6 @@ import com.gradleup.staticanalysis.StaticAnalysisExtension
 import com.gradleup.staticanalysis.Violations
 import com.gradleup.staticanalysis.internal.Configurator
 import com.gradleup.staticanalysis.internal.VariantFilter
-import com.gradleup.staticanalysis.internal.findbugs.CollectFindbugsViolationsTask
-import com.gradleup.staticanalysis.internal.findbugs.GenerateFindBugsHtmlReport
 import org.gradle.api.DomainObjectSet
 import org.gradle.api.GradleException
 import org.gradle.api.NamedDomainObjectContainer
@@ -124,7 +122,7 @@ class SpotBugsConfigurator implements Configurator {
         if (htmlReportEnabled) {
             createHtmlReportTask(taskName)
         }
-        project.tasks.register("collect${taskName.capitalize()}Violations", CollectFindbugsViolationsTask) { task ->
+        project.tasks.register("collect${taskName.capitalize()}Violations", CollectSpotBugsViolationsTask) { task ->
             def spotbugs = project.tasks[taskName] as SourceTask
             configureToolTask(spotbugs)
             task.xmlReportFile = spotbugs.reports.xml.destination
@@ -139,7 +137,7 @@ class SpotBugsConfigurator implements Configurator {
     }
 
     private void createHtmlReportTask(String taskName) {
-        project.tasks.register("generate${taskName.capitalize()}HtmlReport", GenerateFindBugsHtmlReport) { GenerateFindBugsHtmlReport task ->
+        project.tasks.register("generate${taskName.capitalize()}HtmlReport", GenerateSpotBugsHtmlReport) { GenerateSpotBugsHtmlReport task ->
             def spotbugs = project.tasks[taskName]
             task.xmlReportFile = spotbugs.reports.xml.destination
             task.htmlReportFile = new File(task.xmlReportFile.absolutePath - '.xml' + '.html')
