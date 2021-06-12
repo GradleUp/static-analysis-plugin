@@ -45,7 +45,6 @@ without any additional hassle.
 
 ## Add the plugin to your project
         
-[ ![Bintray](https://img.shields.io/bintray/v/gradleup/maven/static-analysis-plugin) ](https://bintray.com/gradleup/maven/static-analysis-plugin/_latestVersion)
 [ ![Gradle Plugin Portal](https://img.shields.io/maven-metadata/v/https/plugins.gradle.org/m2/com/gradleup/static-analysis/com.gradleup.static-analysis.gradle.plugin/maven-metadata.xml.svg?label=Gradle%20Plugins%20Portal) ](https://plugins.gradle.org/plugin/com.gradleup.static-analysis)
 
 Add the plugin in `build.gradle(.kts)` file
@@ -61,7 +60,7 @@ Or apply the plugin from jcenter as a classpath dependency
 ```groovy
 buildscript {
     repositories {
-       jcenter()
+       gradlePluginPortal()
     }
     dependencies {
         classpath("com.gradleup:static-analysis-plugin:<latest-version>")
