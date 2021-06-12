@@ -45,8 +45,8 @@ class PmdAndroidVariantIntegrationTest {
                 .withToolsConfig(DEFAULT_PMD_RULES)
                 .buildAndFail('check')
 
-        assertThat(result.logs).containsLimitExceeded(1, 0)
-        assertThat(result.logs).containsPmdViolations(1, 1,
+        assertThat(result.logs).containsLimitExceeded(1, 1)
+        assertThat(result.logs).containsPmdViolations(1, 2,
                 result.buildFileUrl('reports/pmd/main.html'),
                 result.buildFileUrl('reports/pmd/test.html'))
     }
@@ -63,8 +63,8 @@ class PmdAndroidVariantIntegrationTest {
                 .withToolsConfig(DEFAULT_PMD_RULES)
                 .buildAndFail('check')
 
-        assertThat(result.logs).containsLimitExceeded(1, 0)
-        assertThat(result.logs).containsPmdViolations(1, 1,
+        assertThat(result.logs).containsLimitExceeded(1, 1)
+        assertThat(result.logs).containsPmdViolations(1, 2,
                 result.buildFileUrl('reports/pmd/main.html'),
                 result.buildFileUrl('reports/pmd/androidTest.html'))
     }
@@ -95,8 +95,8 @@ class PmdAndroidVariantIntegrationTest {
                 .withToolsConfig(DEFAULT_PMD_RULES)
                 .buildAndFail('check')
 
-        assertThat(result.logs).containsLimitExceeded(1, 0)
-        assertThat(result.logs).containsPmdViolations(1, 1,
+        assertThat(result.logs).containsLimitExceeded(1, 1)
+        assertThat(result.logs).containsPmdViolations(1, 2,
                 result.buildFileUrl('reports/pmd/main.html'),
                 result.buildFileUrl('reports/pmd/demo.html'))
     }
@@ -121,8 +121,8 @@ class PmdAndroidVariantIntegrationTest {
                 .withToolsConfig(DEFAULT_PMD_RULES)
                 .buildAndFail('check')
 
-        assertThat(result.logs).containsLimitExceeded(1, 0)
-        assertThat(result.logs).containsPmdViolations(2, 1,
+        assertThat(result.logs).containsLimitExceeded(1, 2)
+        assertThat(result.logs).containsPmdViolations(2, 3,
                 result.buildFileUrl('reports/pmd/main.html'),
                 result.buildFileUrl('reports/pmd/demo.html'),
                 result.buildFileUrl('reports/pmd/full.html'))
@@ -158,7 +158,7 @@ class PmdAndroidVariantIntegrationTest {
                 .withSourceSet('full', Fixtures.Pmd.SOURCES_WITH_PRIORITY_1_VIOLATION)
                 .withPenalty('''{
                     maxErrors = 1
-                    maxWarnings = 1
+                    maxWarnings = 2
                 }''')
                 .withAdditionalAndroidConfig('''
                     flavorDimensions 'tier'
@@ -176,7 +176,7 @@ class PmdAndroidVariantIntegrationTest {
                 .build('check')
 
         assertThat(result.logs).doesNotContainLimitExceeded()
-        assertThat(result.logs).containsPmdViolations(1, 1,
+        assertThat(result.logs).containsPmdViolations(1, 2,
                 result.buildFileUrl('reports/pmd/main.html'),
                 result.buildFileUrl('reports/pmd/demo.html'))
         def pmdTasks = result.tasksPaths.findAll { it.startsWith(':pmd') }
