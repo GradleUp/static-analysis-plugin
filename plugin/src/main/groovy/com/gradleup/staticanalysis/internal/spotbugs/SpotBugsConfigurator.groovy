@@ -82,32 +82,12 @@ class SpotBugsConfigurator implements Configurator {
         if (configured) return
 
         variants.all { configureVariant(it) }
-        variantFilter.filteredTestVariants.all { configureVariant(it) }
-        variantFilter.filteredUnitTestVariants.all { configureVariant(it) }
         configured = true
     }
 
     private void configureVariant(variant) {
-        createToolTaskForAndroid(variant)
         def collectViolations = createCollectViolations(getToolTaskNameFor(variant), violations)
         evaluateViolations.dependsOn collectViolations
-    }
-
-    private void createToolTaskForAndroid(variant) {
-        project.tasks.register(getToolTaskNameFor(variant), Class.forName('com.github.spotbugs.SpotBugsTask')) { SourceTask task ->
-            def javaCompile = javaCompile(variant)
-            def androidSourceDirs = variant.sourceSets.collect {
-                it.javaDirectories
-            }.flatten()
-            task.description = "Run SpotBugs analysis for ${variant.name} classes"
-            task.setSource(androidSourceDirs)
-            task.classpath = javaCompile.classpath
-            task.extraArgs '-auxclasspath', androidJar
-            task.conventionMapping.map("classes") {
-                project.fileTree(javaCompile.destinationDir)
-            }
-            task.dependsOn javaCompile
-        }
     }
 
     private void configureJavaProject() {
@@ -125,9 +105,9 @@ class SpotBugsConfigurator implements Configurator {
             createHtmlReportTask(taskName)
         }
         project.tasks.register("collect${taskName.capitalize()}Violations", CollectFindbugsViolationsTask) { task ->
-            def spotbugs = project.tasks[taskName] as SourceTask
+            def spotbugs = project.tasks[taskName]
             configureToolTask(spotbugs)
-            task.xmlReportFile = spotbugs.reports.xml.destination
+            task.xmlReportFile = project.file("${project.buildDir}/reports/spotbugs/main/spotbugs.xml")
             task.violations = violations
 
             if (htmlReportEnabled) {
@@ -141,19 +121,25 @@ class SpotBugsConfigurator implements Configurator {
     private void createHtmlReportTask(String taskName) {
         project.tasks.register("generate${taskName.capitalize()}HtmlReport", GenerateFindBugsHtmlReport) { GenerateFindBugsHtmlReport task ->
             def spotbugs = project.tasks[taskName]
-            task.xmlReportFile = spotbugs.reports.xml.destination
+            task.xmlReportFile = project.file("${project.buildDir}/reports/spotbugs/main/spotbugs.xml")
             task.htmlReportFile = new File(task.xmlReportFile.absolutePath - '.xml' + '.html')
             task.classpath = spotbugs.spotbugsClasspath
             task.dependsOn spotbugs
         }
     }
 
-    private static void configureToolTask(SourceTask task) {
+    private void configureToolTask(def task) {
         task.group = 'verification'
-        task.exclude '**/*.kt'
         task.ignoreFailures = true
-        task.reports.xml.enabled = true
-        task.reports.html.enabled = false
+        task.reports {
+            xml {
+                enabled = true
+                destination = project.file("${project.buildDir}/reports/spotbugs/main/spotbugs.xml")
+            }
+        }
+        task.reports {
+            html.enabled = false
+        }
     }
 
     private static String getToolTaskNameFor(named) {
