@@ -180,6 +180,6 @@ class SpotBugsIntegrationTest {
 
     private TestProject createProjectWith() {
         projectRule.newProject()
-                .withPlugin('com.github.spotbugs', "2.0.0")
+                .withPlugin('com.github.spotbugs', "4.7.1")
     }
 }

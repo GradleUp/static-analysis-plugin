@@ -32,7 +32,7 @@ class SpotBugsConfigurationTest {
     @Test
     void shouldConfigureSuccessFully() {
         projectRule.newProject()
-                .withPlugin('com.github.spotbugs', "2.0.0")
+                .withPlugin('com.github.spotbugs', "4.7.1")
                 .withSourceSet('main', SOURCES_WITH_LOW_VIOLATION)
                 .withToolsConfig("spotbugs { }")
                 .build('check', '--dry-run')
@@ -41,7 +41,7 @@ class SpotBugsConfigurationTest {
     @Test
     void shouldNotFailBuildWhenSpotBugsIsConfiguredMultipleTimes() {
         projectRule.newProject()
-                .withPlugin('com.github.spotbugs', "2.0.0")
+                .withPlugin('com.github.spotbugs', "4.7.1")
                 .withSourceSet('main', SOURCES_WITH_LOW_VIOLATION)
                 .withPenalty('none')
                 .withToolsConfig("""

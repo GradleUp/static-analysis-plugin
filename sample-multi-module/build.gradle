@@ -19,16 +19,9 @@ buildscript {
 apply from: rootProject.file('team-props/tasks.gradle')
 
 subprojects {
-    buildscript {
-        repositories {
-            jcenter()
-        }
-    }
-
     repositories {
         google()
         mavenCentral()
-        jcenter()
     }
 }
 

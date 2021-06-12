@@ -2,4 +2,5 @@
 <lint>
   <!-- Disable the given check in this project -->
   <issue id="GradleDependency" severity="ignore" />
+  <issue id="JcenterRepositoryObsolete" severity="ignore" />
 </lint>
