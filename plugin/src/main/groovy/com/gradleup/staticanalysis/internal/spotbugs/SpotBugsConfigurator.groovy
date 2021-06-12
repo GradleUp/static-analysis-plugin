@@ -11,7 +11,6 @@ import org.gradle.api.GradleException
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Project
 import org.gradle.api.Task
-import org.gradle.api.tasks.SourceTask
 
 import static com.gradleup.staticanalysis.internal.Exceptions.handleException
 
@@ -86,7 +85,7 @@ class SpotBugsConfigurator implements Configurator {
     }
 
     private void configureVariant(variant) {
-        def collectViolations = createCollectViolations(getToolTaskNameFor(variant), violations)
+        def collectViolations = createCollectViolations(variant.name, getToolTaskNameFor(variant), violations)
         evaluateViolations.dependsOn collectViolations
     }
 
@@ -94,20 +93,20 @@ class SpotBugsConfigurator implements Configurator {
         if (configured) return
 
         project.sourceSets.all { sourceSet ->
-            def collectViolations = createCollectViolations(getToolTaskNameFor(sourceSet), violations)
+            def collectViolations = createCollectViolations(sourceSet.name, getToolTaskNameFor(sourceSet), violations)
             evaluateViolations.dependsOn collectViolations
         }
         configured = true
     }
 
-    private def createCollectViolations(String taskName, Violations violations) {
+    private def createCollectViolations(String sourceSetName, String taskName, Violations violations) {
         if (htmlReportEnabled) {
-            createHtmlReportTask(taskName)
+            createHtmlReportTask(sourceSetName, taskName)
         }
         project.tasks.register("collect${taskName.capitalize()}Violations", CollectFindbugsViolationsTask) { task ->
             def spotbugs = project.tasks[taskName]
-            configureToolTask(spotbugs)
-            task.xmlReportFile = project.file("${project.buildDir}/reports/spotbugs/main/spotbugs.xml")
+            configureToolTask(spotbugs, sourceSetName)
+            task.xmlReportFile = project.file("${project.buildDir}/reports/spotbugs/${sourceSetName}.xml")
             task.violations = violations
 
             if (htmlReportEnabled) {
@@ -118,23 +117,23 @@ class SpotBugsConfigurator implements Configurator {
         }
     }
 
-    private void createHtmlReportTask(String taskName) {
+    private void createHtmlReportTask(String sourceSetName, String taskName) {
         project.tasks.register("generate${taskName.capitalize()}HtmlReport", GenerateFindBugsHtmlReport) { GenerateFindBugsHtmlReport task ->
             def spotbugs = project.tasks[taskName]
-            task.xmlReportFile = project.file("${project.buildDir}/reports/spotbugs/main/spotbugs.xml")
+            task.xmlReportFile = project.file("${project.buildDir}/reports/spotbugs/${sourceSetName}.xml")
             task.htmlReportFile = new File(task.xmlReportFile.absolutePath - '.xml' + '.html')
             task.classpath = spotbugs.spotbugsClasspath
             task.dependsOn spotbugs
         }
     }
 
-    private void configureToolTask(def task) {
+    private void configureToolTask(def task, String sourceSetName) {
         task.group = 'verification'
         task.ignoreFailures = true
         task.reports {
             xml {
                 enabled = true
-                destination = project.file("${project.buildDir}/reports/spotbugs/main/spotbugs.xml")
+                destination = project.file("${project.buildDir}/reports/spotbugs/${sourceSetName}.xml")
             }
         }
         task.reports {
