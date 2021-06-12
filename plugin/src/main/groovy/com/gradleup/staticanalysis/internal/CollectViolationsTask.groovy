@@ -3,6 +3,7 @@ package com.gradleup.staticanalysis.internal
 import com.gradleup.staticanalysis.Violations
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.InputFile
+import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.TaskAction
 
@@ -13,6 +14,8 @@ abstract class CollectViolationsTask extends DefaultTask {
     @InputFile
     @PathSensitive(RELATIVE)
     private File xmlReportFile
+    @Internal
+    @PathSensitive(RELATIVE)
     private File htmlReportFile
     private Violations violations
 
