@@ -1,6 +1,15 @@
 Change Log
 ==========
 
+Version 1.4
+-----------
+
+- Support for Gradle 7.x added (Gradle 5.x and 6.x should still be supported)
+- Support for Spotbugs Gradle plugin 4.x added. Since Spotbugs is not backward compatible, support for 2.x/3.x are removed.
+- Minor behavior changes:
+  - Hard-coded pmd version removed. It will now automatically use the associated version with Gradle.
+  - Migrated to official Spotbugs Android support. There might be minor differences.
+
 Version 1.3
 -----------
 
