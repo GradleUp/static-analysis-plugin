@@ -15,7 +15,6 @@ abstract class CollectViolationsTask extends DefaultTask {
     @PathSensitive(RELATIVE)
     private File xmlReportFile
     @Internal
-    @PathSensitive(RELATIVE)
     private File htmlReportFile
     private Violations violations
 
