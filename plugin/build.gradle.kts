@@ -44,16 +44,5 @@ publishing {
             packaging = findProperty("POM_PACKAGING")?.toString()
         }
     }
-
-    repositories {
-        maven {
-            name = "bintray"
-            url = uri("https://api.bintray.com/maven/gradleup/maven/static-analysis-plugin/;publish=1;override=1")
-            credentials {
-                username = System.getenv("BINTRAY_USER")
-                password = System.getenv("BINTRAY_API_KEY")
-            }
-        }
-    }
 }
 
