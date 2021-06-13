@@ -26,6 +26,11 @@ jobs:
       - name: Run tests
         run: ./gradlew build --stacktrace
 
+      - name: Run plugin on samples
+        run: |
+          ./gradlew -p sample evaluateViolations
+          ./gradlew -p sample-multi-module evaluateViolations
+
       - name: Bundle the build report
         if: failure()
         run: find . -type d -name 'reports' | zip -@ -r build-reports.zip

@@ -20,10 +20,6 @@ subprojects {
     repositories {
         google()
         mavenCentral()
+        jcenter()
     }
-}
-
-tasks.wrapper {
-    gradleVersion = '5.2.1'
-    distributionType = Wrapper.DistributionType.ALL
 }
