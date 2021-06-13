@@ -9,7 +9,6 @@ import org.gradle.api.GradleException
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Project
 import org.gradle.api.Task
-import org.gradle.api.tasks.SourceTask
 
 import static com.gradleup.staticanalysis.internal.Exceptions.handleException
 
@@ -80,52 +79,32 @@ class SpotBugsConfigurator implements Configurator {
         if (configured) return
 
         variants.all { configureVariant(it) }
-        variantFilter.filteredTestVariants.all { configureVariant(it) }
-        variantFilter.filteredUnitTestVariants.all { configureVariant(it) }
         configured = true
     }
 
     private void configureVariant(variant) {
-        createToolTaskForAndroid(variant)
-        def collectViolations = createCollectViolations(getToolTaskNameFor(variant), violations)
+        def collectViolations = createCollectViolations(variant.name, getToolTaskNameFor(variant), violations)
         evaluateViolations.dependsOn collectViolations
-    }
-
-    private void createToolTaskForAndroid(variant) {
-        project.tasks.register(getToolTaskNameFor(variant), Class.forName('com.github.spotbugs.SpotBugsTask')) { SourceTask task ->
-            def javaCompile = javaCompile(variant)
-            def androidSourceDirs = variant.sourceSets.collect {
-                it.javaDirectories
-            }.flatten()
-            task.description = "Run SpotBugs analysis for ${variant.name} classes"
-            task.setSource(androidSourceDirs)
-            task.classpath = javaCompile.classpath
-            task.extraArgs '-auxclasspath', androidJar
-            task.conventionMapping.map("classes") {
-                project.fileTree(javaCompile.destinationDir)
-            }
-            task.dependsOn javaCompile
-        }
     }
 
     private void configureJavaProject() {
         if (configured) return
 
         project.sourceSets.all { sourceSet ->
-            def collectViolations = createCollectViolations(getToolTaskNameFor(sourceSet), violations)
+            def collectViolations = createCollectViolations(sourceSet.name, getToolTaskNameFor(sourceSet), violations)
             evaluateViolations.dependsOn collectViolations
         }
         configured = true
     }
 
-    private def createCollectViolations(String taskName, Violations violations) {
+    private def createCollectViolations(String sourceSetName, String taskName, Violations violations) {
         if (htmlReportEnabled) {
-            createHtmlReportTask(taskName)
+            createHtmlReportTask(sourceSetName, taskName)
         }
         project.tasks.register("collect${taskName.capitalize()}Violations", CollectSpotBugsViolationsTask) { task ->
-            def spotbugs = project.tasks[taskName] as SourceTask
-            configureToolTask(spotbugs)
-            task.xmlReportFile = spotbugs.reports.xml.destination
+            def spotbugs = project.tasks[taskName]
+            configureToolTask(spotbugs, sourceSetName)
+            task.xmlReportFile = project.file("${project.buildDir}/reports/spotbugs/${sourceSetName}.xml")
             task.violations = violations
 
             if (htmlReportEnabled) {
@@ -136,37 +115,31 @@ class SpotBugsConfigurator implements Configurator {
         }
     }
 
-    private void createHtmlReportTask(String taskName) {
+    private void createHtmlReportTask(String sourceSetName, String taskName) {
         project.tasks.register("generate${taskName.capitalize()}HtmlReport", GenerateSpotBugsHtmlReport) { GenerateSpotBugsHtmlReport task ->
             def spotbugs = project.tasks[taskName]
-            task.xmlReportFile = spotbugs.reports.xml.destination
+            task.xmlReportFile = project.file("${project.buildDir}/reports/spotbugs/${sourceSetName}.xml")
             task.htmlReportFile = new File(task.xmlReportFile.absolutePath - '.xml' + '.html')
             task.classpath = spotbugs.spotbugsClasspath
             task.dependsOn spotbugs
         }
     }
 
-    private static void configureToolTask(SourceTask task) {
+    private void configureToolTask(def task, String sourceSetName) {
         task.group = 'verification'
-        task.exclude '**/*.kt'
         task.ignoreFailures = true
-        task.reports.xml.enabled = true
-        task.reports.html.enabled = false
+        task.reports {
+            xml {
+                enabled = true
+                destination = project.file("${project.buildDir}/reports/spotbugs/${sourceSetName}.xml")
+            }
+        }
+        task.reports {
+            html.enabled = false
+        }
     }
 
     private static String getToolTaskNameFor(named) {
         "spotbugs${named.name.capitalize()}"
-    }
-
-    private static def javaCompile(variant) {
-        if (variant.hasProperty('javaCompileProvider')) {
-            variant.javaCompileProvider.get()
-        } else {
-            variant.javaCompile
-        }
-    }
-
-    private def getAndroidJar() {
-        "${project.android.sdkDirectory}/platforms/${project.android.compileSdkVersion}/android.jar"
     }
 }

@@ -50,7 +50,7 @@ class DeployRulesTestRule implements TestRule {
         new File(projectDir, 'build.gradle').text = """
             buildscript {
                 repositories {
-                    jcenter()
+                    mavenCentral()
                 }
             }
             

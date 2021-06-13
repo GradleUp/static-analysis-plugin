@@ -1,11 +1,14 @@
 package com.gradleup.staticanalysis
 
 import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
 
 class EvaluateViolationsTask extends DefaultTask {
 
+    @Input
     Closure<ViolationsEvaluator> evaluator
+    @Input
     Closure<Set<Violations>> allViolations
 
     EvaluateViolationsTask() {

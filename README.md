@@ -55,7 +55,7 @@ plugins {
 }
 ```   
 
-Or apply the plugin from jcenter as a classpath dependency
+Or apply the plugin from Gradle plugin portal as a classpath dependency
 
 ```groovy
 buildscript {
@@ -63,7 +63,7 @@ buildscript {
        gradlePluginPortal()
     }
     dependencies {
-        classpath("com.gradleup:static-analysis-plugin:<latest-version>")
+        classpath("com.gradleup:plugin:<latest-version>")
     }
 }
 

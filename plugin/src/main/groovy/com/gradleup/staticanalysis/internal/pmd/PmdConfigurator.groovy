@@ -40,14 +40,6 @@ class PmdConfigurator extends CodeQualityConfigurator<Pmd, PmdExtension> {
     }
 
     @Override
-    protected Action<PmdExtension> getDefaultConfiguration() {
-        return { extension ->
-            extension.toolVersion = '5.5.1'
-            extension.rulePriority = 5
-        }
-    }
-
-    @Override
     protected void createToolTaskForAndroid(sourceSet) {
         project.tasks.register(getToolTaskNameFor(sourceSet), Pmd) { Pmd task ->
             task.description = "Run PMD analysis for sourceSet ${sourceSet.name} classes"

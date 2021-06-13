@@ -9,7 +9,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath 'com.android.tools.build:gradle:4.2.1'
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.21'
     }
 }
@@ -26,11 +26,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt' // adding kapt since we face compat issues before
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 29
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 27
+        targetSdkVersion 29
         versionCode 1
         versionName '1.0'
     }

@@ -16,6 +16,11 @@ gradlePlugin {
     }
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
 pluginBundle {
     website = "https://github.com/GradleUp/static-analysis-plugin/"
     vcsUrl = "https://github.com/GradleUp/static-analysis-plugin.git"
@@ -26,7 +31,7 @@ dependencies {
     testImplementation("junit:junit:4.13")
     testImplementation("com.google.truth:truth:0.30")
     testImplementation("com.google.guava:guava:19.0")
-    testImplementation("org.mockito:mockito-core:2.13.0")
+    testImplementation("org.mockito:mockito-core:3.11.1")
     testImplementation("com.google.code.findbugs:jsr305:3.0.0")
 }
 

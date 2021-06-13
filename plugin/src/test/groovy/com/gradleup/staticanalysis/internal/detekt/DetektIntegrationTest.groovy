@@ -19,14 +19,6 @@ class DetektIntegrationTest {
     @Parameterized.Parameters(name = "{0} with Detekt: {1}")
     static Iterable rules() {
         return [
-                [TestProjectRule.forKotlinProject(), "1.0.0.RC9.2"],
-                [TestProjectRule.forAndroidKotlinProject(), "1.0.0.RC9.2"],
-                [TestProjectRule.forKotlinProject(), "1.0.1"],
-                [TestProjectRule.forAndroidKotlinProject(), "1.0.1"],
-                [TestProjectRule.forKotlinProject(), "1.1.1"],
-                [TestProjectRule.forAndroidKotlinProject(), "1.1.1"],
-                [TestProjectRule.forKotlinProject(), "1.2.2"],
-                [TestProjectRule.forAndroidKotlinProject(), "1.2.2"],
                 [TestProjectRule.forKotlinProject(), "1.3.1"],
                 [TestProjectRule.forAndroidKotlinProject(), "1.3.1"],
         ]*.toArray()

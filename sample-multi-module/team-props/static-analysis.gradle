@@ -23,7 +23,7 @@ staticAnalysis {
     }
 
     spotbugs {
-        excludeFilter rootProject.file('team-props/findbugs-excludes.xml')
+        excludeFilter = rootProject.file('team-props/findbugs-excludes.xml')
         includeVariants { variant -> variant.name.contains('debug') }
     }
 
@@ -35,7 +35,6 @@ staticAnalysis {
 
     detekt {
         config = rootProject.files('team-props/detekt-config.yml')
-        filters = '.*test.*,.*/resources/.*,.*/tmp/.*'
     }
 
     ktlint {

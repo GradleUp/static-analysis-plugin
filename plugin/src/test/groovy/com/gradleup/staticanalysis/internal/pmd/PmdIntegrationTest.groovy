@@ -77,8 +77,8 @@ public class PmdIntegrationTest {
                 .withToolsConfig(pmd(DEFAULT_RULES))
                 .buildAndFail('check')
 
-        assertThat(result.logs).containsLimitExceeded(2, 0)
-        assertThat(result.logs).containsPmdViolations(2, 0,
+        assertThat(result.logs).containsLimitExceeded(2, 1)
+        assertThat(result.logs).containsPmdViolations(2, 1,
                 result.buildFileUrl('reports/pmd/main.html'))
     }
 
@@ -109,28 +109,9 @@ public class PmdIntegrationTest {
                 .build('check')
 
         assertThat(result.logs).doesNotContainLimitExceeded()
-        assertThat(result.logs).containsPmdViolations(2, 2,
+        assertThat(result.logs).containsPmdViolations(2, 3,
                 result.buildFileUrl('reports/pmd/main.html'),
                 result.buildFileUrl('reports/pmd/test.html'))
-    }
-
-    /**
-     * We found out PMD sometimes detects the same violation twice, but with different priority.
-     * The issue seems related to the customisation of a rule coming from one of the predefined rule sets.
-     */
-    @Test
-    public void shouldTakeInAccountDuplicatedViolationsWithDifferentPriorities() {
-        TestProject.Result result = projectRule.newProject()
-                .withSourceSet('main', Fixtures.Pmd.SOURCES_WITH_PRIORITY_5_VIOLATION)
-                .withPenalty('''{
-                    maxWarnings = 0
-                    maxErrors = 0
-                }''')
-                .withToolsConfig(pmd(DEFAULT_RULES))
-                .buildAndFail('check')
-
-        assertThat(result.logs).containsPmdViolations(1, 1,
-                result.buildFileUrl('reports/pmd/main.html'))
     }
 
     @Test

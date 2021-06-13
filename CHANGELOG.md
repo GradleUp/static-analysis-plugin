@@ -5,7 +5,7 @@ Version 1.3
 -----------
 
 - First release under new group name. The plugin is now available under 
-`com.gradleup.static-analysis` plugin id and published in jCenter and Gradle Plugin Portal.
+`com.gradleup.static-analysis` plugin id and published in Gradle Plugin Portal.
 - Package names are changed according to the new repository
 - Findbugs support is completely removed in order to support Gradle 6
 
