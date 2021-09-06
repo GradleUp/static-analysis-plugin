@@ -63,7 +63,7 @@ buildscript {
        gradlePluginPortal()
     }
     dependencies {
-        classpath("com.gradleup:plugin:<latest-version>")
+        classpath("com.gradleup:static-analysis-plugin:<latest-version>")
     }
 }
 
